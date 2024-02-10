@@ -1,23 +1,58 @@
-class Program
+using System;
+
+class EternalQuestProgram
 {
     static void Main()
     {
         GoalManager goalManager = new GoalManager();
+        string userInput;
 
-        Goal marathonGoal = new SimpleGoal("Run a Marathon", 1000);
-        Goal scripturesGoal = new EternalGoal("Read Scriptures", 100);
-        Goal templeGoal = new ChecklistGoal("Attend the Temple", 50, 10, 500);
+        do
+        {
+            DisplayMenu();
+            userInput = Console.ReadLine();
 
-        goalManager.AddGoal(marathonGoal);
-        goalManager.AddGoal(scripturesGoal);
-        goalManager.AddGoal(templeGoal);
+            switch (userInput)
+            {
+                case "1":
+                    goalManager.CreateGoal();
+                    break;
+                case "2":
+                    goalManager.RecordEvent();
+                    break;
+                case "3":
+                    goalManager.DisplayGoals();
+                    break;
+                case "4":
+                    goalManager.DisplayScore();
+                    break;
+                case "5":
+                    goalManager.SaveGoals();
+                    break;
+                case "6":
+                    goalManager.LoadGoals();
+                    break;
+                case "7":
+                    Console.WriteLine("Exiting the program. Goodbye!");
+                    break;
+                default:
+                    Console.WriteLine("Invalid choice. Please enter a number from 1 to 7.");
+                    break;
+            }
 
-        goalManager.RecordEvent(marathonGoal);
-        goalManager.RecordEvent(scripturesGoal);
-        goalManager.RecordEvent(templeGoal);
-        goalManager.RecordEvent(templeGoal);
+        } while (userInput != "7");
+    }
 
-        goalManager.DisplayScore();
-        goalManager.DisplayGoals();
+    static void DisplayMenu()
+    {
+        Console.WriteLine("===== Eternal Quest Program =====");
+        Console.WriteLine("1. Create Goal");
+        Console.WriteLine("2. Record Event");
+        Console.WriteLine("3. Display Goals");
+        Console.WriteLine("4. Display Score");
+        Console.WriteLine("5. Save Goals");
+        Console.WriteLine("6. Load Goals");
+        Console.WriteLine("7. Exit");
+        Console.Write("Enter your choice: ");
     }
 }

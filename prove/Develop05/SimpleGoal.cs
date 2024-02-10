@@ -1,10 +1,8 @@
 public class SimpleGoal : Goal
 {
-    public SimpleGoal(string name, int value) : base(name, value) { }
-
     public override void RecordEvent()
     {
-        Console.WriteLine($"Goal completed: {Name} (+{Value} points)");
-        IsComplete = true;
+        base.RecordEvent();
+        Console.WriteLine($"You gained {Value} points for completing the simple goal: {Name}");
     }
 }

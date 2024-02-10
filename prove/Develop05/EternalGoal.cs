@@ -1,9 +1,8 @@
 public class EternalGoal : Goal
 {
-    public EternalGoal(string name, int value) : base(name, value) { }
-
     public override void RecordEvent()
     {
-        Console.WriteLine($"Event recorded for {Name} (+{Value} points)");
+        base.RecordEvent();
+        Console.WriteLine($"You gained {Value} points for your eternal goal: {Name}");
     }
 }

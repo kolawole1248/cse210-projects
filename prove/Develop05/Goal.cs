@@ -1,17 +1,11 @@
-using System;
-
-public abstract class Goal
+public class Goal
 {
     public string Name { get; set; }
     public int Value { get; set; }
     public bool IsComplete { get; set; }
 
-    public Goal(string name, int value)
+    public virtual void RecordEvent()
     {
-        Name = name;
-        Value = value;
-        IsComplete = false;
+        IsComplete = true;
     }
-
-    public abstract void RecordEvent();
 }

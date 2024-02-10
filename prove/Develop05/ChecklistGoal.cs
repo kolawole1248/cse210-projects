@@ -1,30 +1,23 @@
 public class ChecklistGoal : Goal
 {
-    private int completionCount;
-    private int targetCount;
-    public int Bonus { get; private set; }
-
-    public ChecklistGoal(string name, int value, int targetCount, int bonus) : base(name, value)
-    {
-        this.targetCount = targetCount;
-        Bonus = bonus;
-        completionCount = 0;
-    }
+    public int CompletionCount { get; set; }
+    public int TargetCount { get; set; }
+    public int Bonus { get; set; }
 
     public override void RecordEvent()
     {
-        completionCount++;
+        base.RecordEvent();
+        CompletionCount++;
 
-        Console.WriteLine($"Event recorded for {Name} (+{Value} points)");
-
-        if (completionCount == targetCount)
+        if (IsComplete)
         {
-            Console.WriteLine($"Bonus achieved for completing {Name}! (+{Bonus} points)");
-            IsComplete = true;
+            Console.WriteLine($"You completed the checklist goal: {Name}");
+            Console.WriteLine($"You gained {Value} points and a bonus of {Bonus} points.");
+        }
+        else
+        {
+            Console.WriteLine($"You recorded an event for the checklist goal: {Name}");
+            Console.WriteLine($"You gained {Value} points. Keep going!");
         }
     }
-
-    // Public properties to access CompletionCount and TargetCount
-    public int CompletionCount => completionCount;
-    public int TargetCount => targetCount;
 }
