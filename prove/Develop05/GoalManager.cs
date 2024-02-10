@@ -1,32 +1,50 @@
+using System;
+using System.Collections.Generic;
+
 public class GoalManager
 {
-    private List<Goal> _goals;
+    private List<Goal> goals;
+    private int userScore;
 
     public GoalManager()
     {
-        _goals = new List<Goal>();
+        goals = new List<Goal>();
+        userScore = 0;
     }
 
     public void AddGoal(Goal goal)
     {
-        _goals.Add(goal);
+        goals.Add(goal);
+        Console.WriteLine($"New goal added: {goal.Name}");
     }
 
-    public void RecordEvent(int goalIndex)
+    public void RecordEvent(Goal goal)
     {
-        if (goalIndex >= 0 && goalIndex < _goals.Count)
-        {
-            _goals[goalIndex].RecordEvent();
-        }
+        goal.RecordEvent();
+        userScore += goal.Value;
+
+        if (goal.IsComplete)
+            userScore += (goal as ChecklistGoal)?.Bonus ?? 0;
+    }
+
+    public void DisplayScore()
+    {
+        Console.WriteLine($"User Score: {userScore}");
     }
 
     public void DisplayGoals()
     {
-        foreach (Goal goal in _goals)
+        foreach (var goal in goals)
         {
-            Console.WriteLine(goal.GetDetailsString());
+            string completionStatus = goal.IsComplete ? "[X]" : "[ ]";
+            if (goal is ChecklistGoal checklistGoal)
+            {
+                Console.WriteLine($"{completionStatus} {goal.Name} - Completed {checklistGoal.CompletionCount}/{checklistGoal.TargetCount} times");
+            }
+            else
+            {
+                Console.WriteLine($"{completionStatus} {goal.Name}");
+            }
         }
     }
-
-    
 }

@@ -1,28 +1,17 @@
-public class Goal
+using System;
+
+public abstract class Goal
 {
-    protected string _name;
-    protected int _value;
-    protected bool _isComplete;
+    public string Name { get; set; }
+    public int Value { get; set; }
+    public bool IsComplete { get; set; }
 
-    public Goal(string name)
+    public Goal(string name, int value)
     {
-        _name = name;
-        _value = 0;
-        _isComplete = false;
+        Name = name;
+        Value = value;
+        IsComplete = false;
     }
 
-    public virtual void RecordEvent()
-    {
-        
-        _value += 100;
-        _isComplete = true;
-    }
-
-    public virtual string GetDetailsString()
-    {
-        
-        return $"{_name}: {_value} points";
-    }
-
-    
+    public abstract void RecordEvent();
 }

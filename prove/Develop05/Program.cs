@@ -1,17 +1,23 @@
 class Program
 {
-    static void Main(string[] args)
+    static void Main()
     {
         GoalManager goalManager = new GoalManager();
 
-        // Example usage:
-        goalManager.AddGoal(new SimpleGoal("Run a marathon"));
-        goalManager.AddGoal(new EternalGoal("Read scriptures"));
-        goalManager.AddGoal(new ChecklistGoal("Attend the temple", 10));
+        Goal marathonGoal = new SimpleGoal("Run a Marathon", 1000);
+        Goal scripturesGoal = new EternalGoal("Read Scriptures", 100);
+        Goal templeGoal = new ChecklistGoal("Attend the Temple", 50, 10, 500);
 
-        goalManager.RecordEvent(0); // Record event for the first goal
-        goalManager.RecordEvent(2); // Record event for the third goal
+        goalManager.AddGoal(marathonGoal);
+        goalManager.AddGoal(scripturesGoal);
+        goalManager.AddGoal(templeGoal);
 
+        goalManager.RecordEvent(marathonGoal);
+        goalManager.RecordEvent(scripturesGoal);
+        goalManager.RecordEvent(templeGoal);
+        goalManager.RecordEvent(templeGoal);
+
+        goalManager.DisplayScore();
         goalManager.DisplayGoals();
     }
 }
