@@ -1,8 +1,30 @@
-public class EternalGoal : Goal
+
+namespace GoalTracker 
 {
-    public override void RecordEvent()
+    public class EternalGoal : Goal 
     {
-        base.RecordEvent();
-        Console.WriteLine($"You gained {Value} points for your eternal goal: {Name}");
+        public EternalGoal() : base()
+        {
+        }
+
+        public EternalGoal(StreamReader read) : base(read)
+        {
+        }
+
+        public override void Complete()
+        {
+            _isCompleted = false; 
+            _pointsEarned += _pointsForEachCompletion;
+        }
+
+        protected override string GetFriendlyCompleteActionDescription()
+        {
+            return "each time this habit is repeated";
+        }
+
+        protected override string GetFriendlyGoalTypeName()
+        {
+            return "eternal habit";
+        }
     }
 }

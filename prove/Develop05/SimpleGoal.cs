@@ -1,8 +1,34 @@
-public class SimpleGoal : Goal
+
+namespace GoalTracker 
 {
-    public override void RecordEvent()
+    // Simple goal class
+    public class SimpleGoal : Goal
     {
-        base.RecordEvent();
-        Console.WriteLine($"You gained {Value} points for completing the simple goal: {Name}");
+        public SimpleGoal() : base()
+        {
+        }
+
+        public SimpleGoal(StreamReader read) : base(read)
+        {
+        }
+
+        public override void Complete()
+        {
+            if (!_isCompleted)
+            {
+                _isCompleted = true;
+                _pointsEarned += _pointsForEachCompletion;
+            }
+        }
+
+        protected override string GetFriendlyCompleteActionDescription()
+        {
+            return "completion";
+        }
+
+        protected override string GetFriendlyGoalTypeName()
+        {
+            return "one-time goal";
+        }            
     }
 }
